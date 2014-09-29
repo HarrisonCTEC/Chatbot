@@ -63,7 +63,7 @@ public class Chatbot
 	{
 		boolean okToQuit = false;
 
-		if(input.equals("good bye"))
+		if(input != null && input.equals("good bye"))
 		{
 			okToQuit = true;
 		}
