@@ -17,8 +17,10 @@ public class Chatbot
 	{
 		this.name = name;
 		// this. means talk to the current class
-
 		numberOfChats = 0;
+		
+		memeList = new ArrayList<String>();
+		fillMemeList();
 
 	}
 
@@ -55,6 +57,57 @@ public class Chatbot
 	public void incrementChats()
 	{
 		numberOfChats++;
+	}
+	
+	
+    /**
+     * Fills the meme list with memes
+     */
+	private void fillMemeList()
+	{
+		memeList.add("y u mad bro");
+		memeList.add("doh!");
+		memeList.add("nyan cat");
+		memeList.add("velociraptor");
+		memeList.add("awkward moment");
+		memeList.add("memes");
+	}
+	
+	private boolean memeChecker(String currentText)
+	{
+		boolean isAMeme = false;
+		
+		for(String currentMeme : memeList)
+		{
+			if(currentMeme.equalsIgnoreCase(currentText))
+			{
+				isAMeme = true;
+			}
+		}
+		
+		return isAMeme;
+	}
+	
+	/**
+	 * Process the supplied text from the user to provide a message from the Chatbot.
+	 * @param userText The user supplied text.
+	 * @return What the Chatbot says because of the supplied input.
+	 */
+	public String processText(String userText)
+	{
+		String processedText = "";
+		
+		if(memeChecker(userText))
+		{
+			processedText = "hey, you found a meme: " + userText;
+			processedText += " isn't that cool.";
+		}
+		else
+		{
+			processedText = "Boring, that wan't a meme.";
+		}
+		
+		return processedText;
 	}
 	
 	/**

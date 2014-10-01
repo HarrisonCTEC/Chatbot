@@ -20,7 +20,6 @@ public class ChatBotController
 	 */
 	private String startMessage;
 	
-	
 	/**
 	 * Creates a ChatbotAppController and initializes the associated View and Model objects.
 	 */
@@ -30,7 +29,6 @@ public class ChatBotController
 		notSoCleverBot = new Chatbot("Mr. not so clever");
 		startMessage = "Welcome to the " + notSoCleverBot.getName() + " Chatbot, type in your name.";
 	}
-	
 	
 	/**
 	 * Allows other objects access to the notSoCleverbot. 
@@ -50,12 +48,11 @@ public class ChatBotController
 		
 		while(!notSoCleverBot.quitChecker(message))
 		{
+			message = notSoCleverBot.processText(message);
 			message = appView.displayChatbotConversation(message);
 		}
-		if(notSoCleverBot.quitChecker(message))
-		{
-			quit();
-		}
+		
+		quit();
 		
 	}
 	

@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.JOptionPane;
-
 import controller.ChatBotController;
 
 public class ChatBotView
