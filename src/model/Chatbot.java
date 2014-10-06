@@ -58,8 +58,7 @@ public class Chatbot
 	{
 		numberOfChats++;
 	}
-	
-	
+		
     /**
      * Fills the meme list with memes
      */
@@ -73,6 +72,11 @@ public class Chatbot
 		memeList.add("memes");
 	}
 	
+	/**
+	 * Checks to see if the supplied user text matches any of the memes in the Chatbot's meme list.
+	 * @param currentText The user supplied text.
+	 * @return Whether the String matched any of the built memes.
+	 */
 	private boolean memeChecker(String currentText)
 	{
 		boolean isAMeme = false;
@@ -87,6 +91,41 @@ public class Chatbot
 		
 		return isAMeme;
 	}
+
+	/**
+	 * Checks to see if the supplied user text is less than or equal to 5 characters.
+	 * @param input The user's typed text
+	 * @return if the string is less than or equal to 5
+	 */
+	private boolean stringLengthChecker(String input)
+	{
+		boolean shortString = false;
+		
+		if(input.length() <= 5)
+		{
+			shortString = true;
+		}
+		
+		return shortString;
+	}
+
+	/**
+	 * Process the supplied text from the user to see if it contains the subject.
+	 * @param input The user's typed text
+	 * @param subject The text to search for.
+	 * @return If the input contains the subject.
+	 */
+	private boolean contentChecker(String input, String subject)
+	{
+		boolean containsSubject = false;
+		
+		if(input.contains(subject))
+		{
+			containsSubject = true;
+		}
+		
+		return containsSubject;
+	}
 	
 	/**
 	 * Process the supplied text from the user to provide a message from the Chatbot.
@@ -96,17 +135,31 @@ public class Chatbot
 	public String processText(String userText)
 	{
 		String processedText = "";
+		incrementChats();
 		
-		if(memeChecker(userText))
+		int randomChoice = (int) Math.random() * 3;
+		
+		if (randomChoice == 0)
 		{
-			processedText = "hey, you found a meme: " + userText;
-			processedText += " isn't that cool.";
+			stringLengthChecker(userText);
+		}
+		else if (randomChoice == 1)
+		{
+			contentChecker(userText, "hello");
 		}
 		else
 		{
-			processedText = "Boring, that wan't a meme.";
+			if(memeChecker(userText))
+			{
+				processedText = "hey, you found a meme: " + userText;
+				processedText += " isn't that cool.";
+			}
+			else
+			{
+				processedText = "Boring, that wan't a meme.";
+			}
 		}
-		
+			
 		return processedText;
 	}
 	
