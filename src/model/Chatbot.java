@@ -141,11 +141,25 @@ public class Chatbot
 		
 		if (randomChoice == 0)
 		{
-			stringLengthChecker(userText);
+			if(stringLengthChecker(userText))
+			{
+				processedText = "You're not very talkative are you?";
+			}
+			else
+			{
+				processedText = "And how does that make you feel?";
+			}
 		}
 		else if (randomChoice == 1)
 		{
-			contentChecker(userText, "hello");
+			if(contentChecker(userText, "Harrison"))
+			{
+				processedText = "Don't talk about my creator like that!";
+			}
+			else
+			{
+				processedText = "Hmm, I see...";
+			}
 		}
 		else
 		{
