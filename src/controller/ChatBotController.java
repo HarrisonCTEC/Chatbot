@@ -2,6 +2,8 @@ package controller;
 
 import model.Chatbot;
 import view.ChatBotView;
+import view.ChatbotFrame;
+import view.ChatbotPanel;
 
 public class ChatBotController
 {
@@ -20,12 +22,15 @@ public class ChatBotController
 	 */
 	private String startMessage;
 	
+	private ChatbotFrame baseFrame;
+	
 	/**
 	 * Creates a ChatbotAppController and initializes the associated View and Model objects.
 	 */
 	public ChatBotController()
 	{
 		appView = new ChatBotView(this);
+		baseFrame = new ChatbotFrame(this);
 		notSoCleverBot = new Chatbot("Mr. not so clever");
 		startMessage = "Welcome to the " + notSoCleverBot.getName() + " Chatbot, type in your name.";
 	}
@@ -44,16 +49,32 @@ public class ChatBotController
 	 */
 	public void start()
 	{
-		String message = appView.displayChatbotConversation(startMessage);
+		//String message = appView.displayChatbotConversation(startMessage);
 		
-		while(!notSoCleverBot.quitChecker(message))
-		{
-			message = notSoCleverBot.processText(message);
-			message = appView.displayChatbotConversation(message);
-		}
+		String message = "";
 		
-		quit();
 		
+		ChatbotPanel myAppPanel = (ChatbotPanel) baseFrame.getContentPane();
+		myAppPanel.displayTextToUser(startMessage);
+		
+		
+		message = notSoCleverBot.processText(message);
+		
+		
+		//message = appView.displayChatbotConversation(message);
+
+		
+		//quit();
+		
+	}
+	
+	public String sendTextToChatBot(String userInput)
+	{
+		String response = "";
+		
+		response = notSoCleverBot.processText(userInput);
+		
+		return response;
 	}
 	
 	/**
