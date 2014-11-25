@@ -1,13 +1,28 @@
 package model;
 
 import java.util.ArrayList;
+import model.User;
 
 public class Chatbot
 {
+	/**
+	 * The name of the Chatot
+	 */
 	private String name;
+	/**
+	 * The current number of chats that chatbot has participated in
+	 */
 	private int numberOfChats;
+	/**
+	 * The List of memes used in the chatbot
+	 */
 	private ArrayList<String> memeList;
-
+	/**
+	 * A list of input from the user to be used within the program.
+	 */
+	private ArrayList<String> userInputList;
+	
+	private User myUser;
 	
 	/**
 	 * Creates a Chatbot object with a specified name. Initializes the total chats to 0.
@@ -18,6 +33,8 @@ public class Chatbot
 		this.name = name;
 		// this. means talk to the current class
 		numberOfChats = 0;
+		
+		myUser = new User();
 		
 		memeList = new ArrayList<String>();
 		fillMemeList();
@@ -127,6 +144,26 @@ public class Chatbot
 		return containsSubject;
 	}
 	
+	private boolean userInputChecker(String input)
+	{
+		boolean matchesInput = false;
+		
+		if(userInputList.size() > 0)
+		{
+			for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+			{
+				if(input.equalsIgnoreCase(userInputList.get(loopCount)))
+				{
+					matchesInput = true;
+					userInputList.remove(loopCount);
+					loopCount--;
+				}
+			}
+		}
+		
+		return matchesInput;
+	}
+	
 	/**
 	 * Process the supplied text from the user to provide a message from the Chatbot.
 	 * @param userText The user supplied text.
@@ -137,8 +174,22 @@ public class Chatbot
 		String processedText = "";
 		incrementChats();
 		
-		int randomChoice = (int) Math.random() * 3;
-		
+		int randomChoice = (int) Math.random() * 4;
+		if (userText != null)
+		{
+			if(numberOfChats == 0)
+			{
+				myUser.setName(userText);
+				processedText = "Hello " + myUser.getName() + " what is your age?";
+			}
+			else if(numberOfChats == 1)
+			{
+				int age = Integer.parseInt(userText);
+				myUser.setAge(age);
+				processedText = "Hello " + myUser.getAge() + " you are really " + myUser.getAge() + "years old?";
+				processedText += "\nWhat is your favorite movie?";
+			}
+		}
 		if (randomChoice == 0)
 		{
 			if(stringLengthChecker(userText))
@@ -161,7 +212,7 @@ public class Chatbot
 				processedText = "Hmm, I see...";
 			}
 		}
-		else
+		else if (randomChoice ==2)
 		{
 			if(memeChecker(userText))
 			{
@@ -173,8 +224,65 @@ public class Chatbot
 				processedText = "Boring, that wan't a meme.";
 			}
 		}
+		else if (randomChoice == 4)
+		{
+			userInputList.add(0, userText);
+		}
+		else if (randomChoice == 5)
+		{
+			if(chatbotNameChecker(userText))
+			{
+				processedText = chatbotNameConversation(userText);
+			}
+			else
+			{
+				processedText = noNameConversation(userText);
+			}
+		}
+		else
+		{
+			//userInputChecker
+		}
 			
 		return processedText;
+	}
+	
+	/**
+	 * Checks to see if the name of the Chatbot is contained within the String supplied by the user
+	 * @param input The user supplied String
+	 * @return Whether the name is inside or not
+	 */
+	private boolean chatbotNameChecker(String input)
+	{
+		boolean hasNameInString = false;
+		
+		if(input.indexOf(this.getName()) > -1)
+		{
+			
+		}
+		
+		return hasNameInString;
+	}
+	
+	private String chatbotNameConversation(String input)
+	{
+		String nameConversation = "This is whay you typed after my name: ";
+		
+		nameConversation.concat(input.substring(input.indexOf(this.getName()), input.length()-1));
+		
+		return nameConversation;
+	}
+	
+	private String noNameConversation(String currentInput)
+	{
+		String notNamed = "";
+		
+		int smallRandom = (int) (Math.random() * currentInput.length()/2);
+		int largerRandom = (int) (smallRandom + (Math.random() * (currentInput.length() / 2) + 1));
+		
+		notNamed = "You didn't say my name so here is a special phrase: " + currentInput.substring(smallRandom, largerRandom);
+		
+		return notNamed;
 	}
 	
 	/**

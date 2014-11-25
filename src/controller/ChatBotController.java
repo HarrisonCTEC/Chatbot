@@ -1,6 +1,7 @@
 package controller;
 
 import model.Chatbot;
+import model.User;
 import view.ChatBotView;
 import view.ChatbotFrame;
 import view.ChatbotPanel;
@@ -23,6 +24,8 @@ public class ChatBotController
 	private String startMessage;
 	
 	private ChatbotFrame baseFrame;
+	
+	private User user;
 	
 	/**
 	 * Creates a ChatbotAppController and initializes the associated View and Model objects.
@@ -56,6 +59,7 @@ public class ChatBotController
 		
 		ChatbotPanel myAppPanel = (ChatbotPanel) baseFrame.getContentPane();
 		myAppPanel.displayTextToUser(startMessage);
+		
 		
 		
 		message = notSoCleverBot.processText(message);

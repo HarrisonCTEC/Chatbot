@@ -16,31 +16,45 @@ public class User
 	 */
 	private int age;
 	
+	/**
+	 * Stores information about the user.
+	 */
 	public User()
 	{
 		
 	}
 	
-	
-	/*
-	 * Getters and Setters
+	/**
+	 * Sets the user's name.
+	 * @param name The user's name.
 	 */
-	
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 	
+	/**
+	 * Gets the user's name. 
+	 * @return The user's name.
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	 * Sets the user's age.
+	 * @param age The user's age.
+	 */
 	public void setAge(int age)
 	{
 		this.age = age;
 	}
 	
+	/**
+	 * Gets the user's age.
+	 * @return The use's age.
+	 */
 	public int getAge()
 	{
 		return age;
