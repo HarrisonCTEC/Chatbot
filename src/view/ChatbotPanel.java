@@ -20,13 +20,16 @@ import javax.swing.JLabel;
 public class ChatbotPanel extends JPanel
 {
 	private ChatBotController baseController;
-	
 	private JButton sampleButton;
 	private JTextField sampleField;
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
 	private SpringLayout baseLayout;
 	
+	/**
+	 * Setup the main panel
+	 * @param baseController
+	 */
 	public ChatbotPanel(ChatBotController baseController)
 	{
 		this.baseController = baseController;
@@ -99,6 +102,10 @@ public class ChatbotPanel extends JPanel
 		
 	}
 	
+	/**
+	 * Append text to chat area
+	 * @param input text to show to user.
+	 */
 	public void displayTextToUser(String input)
 	{
 		chatArea.append(input + '\n');
