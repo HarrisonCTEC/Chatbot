@@ -173,7 +173,7 @@ public class Chatbot
 	{
 		String processedText = "";
 		
-		int randomChoice = (int) (Math.random() * 4);
+		int randomChoice = (int) (Math.random() * 6);
 		if (userText != null)
 		{
 			if(numberOfChats == 0)
@@ -219,7 +219,7 @@ public class Chatbot
 						processedText = "Hmm, I see...";
 					}
 				}
-				else if (randomChoice ==2)
+				else if (randomChoice == 2)
 				{
 					if(memeChecker(userText))
 					{
@@ -231,11 +231,12 @@ public class Chatbot
 						processedText = "Boring, that wan't a meme.";
 					}
 				}
-				else if (randomChoice == 4)
+				else if (randomChoice == 3)
 				{
 					userInputList.add(0, userText);
+					processedText = "Okay then...";
 				}
-				else if (randomChoice == 5)
+				else if (randomChoice == 4)
 				{
 					if(chatbotNameChecker(userText))
 					{
