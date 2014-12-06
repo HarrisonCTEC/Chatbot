@@ -32,7 +32,7 @@ public class Chatbot
 	{
 		this.name = name;
 		// this. means talk to the current class
-		numberOfChats = 0;
+		numberOfChats = -1;
 		
 		myUser = new User();
 		
@@ -172,9 +172,8 @@ public class Chatbot
 	public String processText(String userText)
 	{
 		String processedText = "";
-		incrementChats();
 		
-		int randomChoice = (int) Math.random() * 4;
+		int randomChoice = (int) (Math.random() * 4);
 		if (userText != null)
 		{
 			if(numberOfChats == 0)
@@ -183,67 +182,79 @@ public class Chatbot
 				processedText = "Hello " + myUser.getName() + " what is your age?";
 			}
 			else if(numberOfChats == 1)
-			{
+			{	
+				try
+				{
 				int age = Integer.parseInt(userText);
 				myUser.setAge(age);
-				processedText = "Hello " + myUser.getAge() + " you are really " + myUser.getAge() + "years old?";
+				processedText = "Hello " + myUser.getAge() + " you are really " + myUser.getAge() + " years old?";
 				processedText += "\nWhat is your favorite movie?";
-			}
-		}
-		if (randomChoice == 0)
-		{
-			if(stringLengthChecker(userText))
-			{
-				processedText = "You're not very talkative are you?";
+				}
+				catch (Exception e)
+				{
+					processedText = "That's not a number :(";
+				}
 			}
 			else
 			{
-				processedText = "And how does that make you feel?";
+				if (randomChoice == 0)
+				{
+					if(stringLengthChecker(userText))
+					{
+						processedText = "You're not very talkative are you?";
+					}
+					else
+					{
+						processedText = "And how does that make you feel?";
+					}
+				}
+				else if (randomChoice == 1)
+				{
+					if(contentChecker(userText, "Harrison"))
+					{
+						processedText = "Don't talk about my creator like that!";
+					}
+					else
+					{
+						processedText = "Hmm, I see...";
+					}
+				}
+				else if (randomChoice ==2)
+				{
+					if(memeChecker(userText))
+					{
+						processedText = "hey, you found a meme: " + userText;
+						processedText += " isn't that cool.";
+					}
+					else
+					{
+						processedText = "Boring, that wan't a meme.";
+					}
+				}
+				else if (randomChoice == 4)
+				{
+					userInputList.add(0, userText);
+				}
+				else if (randomChoice == 5)
+				{
+					if(chatbotNameChecker(userText))
+					{
+						processedText = chatbotNameConversation(userText);
+					}
+					else
+					{
+						processedText = noNameConversation(userText);
+					}
+				}
+				else
+				{
+					//userInputChecker
+				}
+					
+				
 			}
 		}
-		else if (randomChoice == 1)
-		{
-			if(contentChecker(userText, "Harrison"))
-			{
-				processedText = "Don't talk about my creator like that!";
-			}
-			else
-			{
-				processedText = "Hmm, I see...";
-			}
-		}
-		else if (randomChoice ==2)
-		{
-			if(memeChecker(userText))
-			{
-				processedText = "hey, you found a meme: " + userText;
-				processedText += " isn't that cool.";
-			}
-			else
-			{
-				processedText = "Boring, that wan't a meme.";
-			}
-		}
-		else if (randomChoice == 4)
-		{
-			userInputList.add(0, userText);
-		}
-		else if (randomChoice == 5)
-		{
-			if(chatbotNameChecker(userText))
-			{
-				processedText = chatbotNameConversation(userText);
-			}
-			else
-			{
-				processedText = noNameConversation(userText);
-			}
-		}
-		else
-		{
-			//userInputChecker
-		}
-			
+		incrementChats();
 		return processedText;
 	}
 	
