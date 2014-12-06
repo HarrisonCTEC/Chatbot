@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,7 +32,8 @@ public class ChatbotPanel extends JPanel
 		this.baseController = baseController;
 		sampleButton = new JButton("Click");
 		sampleField = new JTextField(25);
-		chatPane =  new JScrollPane();
+		chatArea = new JTextArea(5, 25);
+		chatPane =  new JScrollPane(chatArea);
 		
 		baseLayout = new SpringLayout();
 		baseLayout.putConstraint(SpringLayout.NORTH, sampleButton, 282, SpringLayout.NORTH, this);
@@ -58,12 +60,10 @@ public class ChatbotPanel extends JPanel
 		this.add(sampleButton);
 		this.add(sampleField);
 		this.add(chatPane);
-		chatArea = new JTextArea(5, 25);
-		baseLayout.putConstraint(SpringLayout.NORTH, chatArea, 45, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, chatArea, 52, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatArea, -44, SpringLayout.NORTH, sampleField);
-		baseLayout.putConstraint(SpringLayout.EAST, chatArea, -67, SpringLayout.EAST, this);
-		add(chatArea);
+		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 45, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 52, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatPane, -44, SpringLayout.NORTH, sampleField);
+		baseLayout.putConstraint(SpringLayout.EAST, chatPane, -67, SpringLayout.EAST, this);
 	}
 	
 	/**
@@ -106,5 +106,6 @@ public class ChatbotPanel extends JPanel
 	public void displayTextToUser(String input)
 	{
 		chatArea.append(input + '\n');
+		chatArea.setCaretPosition(chatArea.getDocument().getLength());
 	}
 }
