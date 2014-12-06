@@ -84,9 +84,9 @@ public class ChatBotController
 	/**
 	 * Quits the Chatbot application with a message to the user that the application is closing.
 	 */
-	private void quit()
+	public static void quit()
 	{
-		appView.displayInformation("goodbye cruel user :(");
+		//appView.displayInformation("goodbye cruel user :(");
 		System.exit(0);
 	}
 }

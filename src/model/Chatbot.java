@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+
+import controller.ChatBotController;
 import model.User;
 
 public class Chatbot
@@ -144,6 +146,11 @@ public class Chatbot
 		return containsSubject;
 	}
 	
+	/**
+	 * Check if user has already input text
+	 * @param input
+	 * @return
+	 */
 	private boolean userInputChecker(String input)
 	{
 		boolean matchesInput = false;
@@ -176,6 +183,13 @@ public class Chatbot
 		int randomChoice = (int) (Math.random() * 6);
 		if (userText != null)
 		{
+			if (quitChecker(userText)){
+				ChatBotController.quit();
+			}
+			else
+			{
+				
+
 			if(numberOfChats == 0)
 			{
 				myUser.setName(userText);
@@ -251,7 +265,7 @@ public class Chatbot
 				{
 					//userInputChecker
 				}
-					
+			}
 				
 			}
 		}
@@ -276,6 +290,11 @@ public class Chatbot
 		return hasNameInString;
 	}
 	
+	/**
+	 * Conversation to display if name is typed
+	 * @param input
+	 * @return
+	 */
 	private String chatbotNameConversation(String input)
 	{
 		String nameConversation = "This is whay you typed after my name: ";
@@ -285,6 +304,11 @@ public class Chatbot
 		return nameConversation;
 	}
 	
+	/**
+	 * Conversation to display if the name is not typed
+	 * @param currentInput
+	 * @return
+	 */
 	private String noNameConversation(String currentInput)
 	{
 		String notNamed = "";
